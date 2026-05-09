@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipment Report — FLCC BOTR Network</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root{--w:#fff;--off:#f9f9f7;--bg:#f3f3f0;--bd:#e6e6e2;--bdd:#d2d2cc;--tx:#181816;--mid:#5c5c58;--lt:#9a9a94;--ac:#2a6049;--as:#eaf3ee;--am:#c8e3d4;--re:#c0392b;--rs:#fdf0ee;--amber:#b45309;--ambs:#fef3c7;--sh:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);--sh2:0 8px 32px rgba(0,0,0,.10);--r:10px;--rr:6px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:14px;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;}
+a{color:var(--ac);}
+code{font-family:'DM Mono',monospace;font-size:11px;background:var(--am);padding:1px 5px;border-radius:3px;}
+header{background:var(--w);border-bottom:1px solid var(--bd);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.brand{display:flex;align-items:center;gap:10px;}
+.bc{width:30px;height:30px;background:var(--ac);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;flex-shrink:0;}
+.brand h1{font-family:'DM Serif Display',serif;font-size:15px;font-weight:400;}
+.brand p{font-size:11px;color:var(--lt);margin-top:1px;}
+.wrap{max-width:860px;margin:0 auto;padding:26px 18px 70px;}
+.card{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:14px;overflow:hidden;}
+.ch{padding:16px 20px 12px;border-bottom:1px solid var(--bd);display:flex;align-items:flex-start;gap:10px;}
+.sn{width:22px;height:22px;background:var(--ac);color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.cht h2{font-family:'DM Serif Display',serif;font-size:16px;font-weight:400;}
+.cht p{font-size:12px;color:var(--lt);margin-top:3px;line-height:1.5;}
+.cb{padding:18px 20px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg.full{grid-column:1/-1;}
+.fg label{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--lt);}
+.fg input,.fg select,.fg textarea{padding:8px 10px;background:var(--off);border:1px solid var(--bd);border-radius:var(--rr);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--tx);outline:none;transition:border .15s;width:100%;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--ac);background:var(--w);box-shadow:0 0 0 3px var(--as);}
+.fg textarea{min-height:72px;resize:vertical;}
+.req{color:var(--re);}
+.tscroll{overflow-x:auto;margin-bottom:12px;}
+.itable{width:100%;border-collapse:collapse;min-width:980px;}
+.itable th{background:var(--off);border-bottom:1px solid var(--bd);padding:8px 7px;font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--lt);text-align:left;white-space:nowrap;}
+.itable td{border-bottom:1px solid var(--bd);padding:5px 4px;vertical-align:middle;}
+.itable tr:last-child td{border-bottom:none;}
+.itable input,.itable select{padding:6px 7px;background:var(--off);border:1px solid var(--bd);border-radius:5px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tx);outline:none;width:100%;}
+.itable input:focus,.itable select:focus{border-color:var(--ac);background:var(--w);}
+.rn{text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--lt);padding-top:10px!important;width:22px;}
+.dbtn{width:26px;height:26px;border-radius:5px;border:1px solid var(--bd);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--lt);font-size:12px;transition:all .15s;margin:auto;}
+.dbtn:hover{background:var(--rs);border-color:#f5c6c2;color:var(--re);}
+.pbtn{width:28px;height:28px;border-radius:5px;border:1px solid var(--bd);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s;margin:auto;}
+.pbtn:hover{background:var(--ambs);border-color:#fde68a;}
+.prev-img{height:28px;border-radius:3px;border:1px solid var(--bd);object-fit:cover;cursor:pointer;vertical-align:middle;}
+.add-btn{width:100%;background:var(--as);color:var(--ac);border:1.5px dashed var(--am);border-radius:var(--rr);padding:8px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.add-btn:hover{background:var(--am);}
+.btn{padding:9px 16px;border-radius:var(--rr);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+.bp{background:var(--ac);color:#fff;}
+.bp:hover:not(:disabled){background:#1f4d3a;}
+.bp:disabled{opacity:.5;cursor:not-allowed;}
+.bs{background:transparent;color:var(--mid);border:1px solid var(--bd);}
+.bs:hover{background:var(--off);}
+.sa{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.sa-note{font-size:12px;color:var(--lt);line-height:1.55;flex:1;}
+.sp{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:18px 20px;margin-bottom:14px;box-shadow:var(--sh);}
+.sp h3{font-family:'DM Serif Display',serif;font-size:16px;font-weight:400;margin-bottom:10px;}
+.sp-note{font-size:12px;color:var(--mid);background:var(--as);border:1px solid var(--am);border-radius:6px;padding:10px 13px;margin-bottom:14px;line-height:1.7;}
+.stbtn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--mid);cursor:pointer;padding:6px 12px;border-radius:20px;border:1px solid var(--bd);background:transparent;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.stbtn:hover{background:var(--off);}
+.success{background:var(--w);border:1.5px solid var(--am);border-radius:var(--r);padding:40px 28px;text-align:center;box-shadow:var(--sh2);}
+.success .si{font-size:48px;margin-bottom:14px;}
+.success h2{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:var(--ac);margin-bottom:8px;}
+.success p{font-size:13px;color:var(--mid);margin-bottom:22px;line-height:1.6;}
+.clbl{font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--lt);text-align:left;margin-bottom:6px;}
+.cbox{background:var(--off);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;font-family:'DM Mono',monospace;font-size:10px;color:var(--mid);word-break:break-all;text-align:left;max-height:88px;overflow-y:auto;line-height:1.6;margin-bottom:14px;}
+.cact{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.info-banner{background:var(--as);border:1px solid var(--am);border-radius:8px;padding:11px 14px;margin-bottom:16px;font-size:12px;color:var(--mid);line-height:1.6;}
+.info-banner strong{color:var(--ac);}
+.size-warn{background:var(--ambs);border:1px solid #fde68a;border-radius:6px;padding:9px 13px;font-size:12px;color:var(--amber);margin-bottom:12px;display:none;}
+.copy-divider{border:none;border-top:1px solid var(--bd);margin:10px 0 14px;}
+.admin-section{background:var(--off);border:1px solid var(--bd);border-radius:8px;padding:13px 16px;margin-bottom:14px;text-align:left;}
+.admin-section .albl{font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--lt);margin-bottom:8px;}
+.admin-section .acact{display:flex;gap:8px;flex-wrap:wrap;}
+.toast{position:fixed;bottom:22px;right:22px;z-index:9999;background:var(--tx);color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:500;box-shadow:var(--sh2);transform:translateY(60px);opacity:0;transition:all .25s;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+@media(max-width:620px){.fgrid{grid-template-columns:1fr;}.sa{flex-direction:column;align-items:stretch;}.sa .btn{width:100%;justify-content:center;}.cact{flex-direction:column;}.cact .btn{width:100%;justify-content:center;}}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bdd);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="bc">✝</div>
+    <div>
+      <h1>FLCC BOTR Network</h1>
+      <p>Satellite Church Equipment Submission</p>
+    </div>
+  </div>
+  <button class="stbtn" onclick="toggleSettings()">⚙ Admin Setup</button>
+</header>
+
+<div class="wrap">
+
+  <!-- SETTINGS PANEL -->
+  <div class="sp" id="sp" style="display:none;">
+    <h3>⚙ EmailJS Configuration — One-Time Setup</h3>
+    <div class="sp-note">
+      1. Sign up free at <a href="https://www.emailjs.com" target="_blank">emailjs.com</a> (200 emails/month free).<br>
+      2. Connect your Gmail as a service. Create a template using:<br>
+      <code>{{church}}</code> <code>{{submitter}}</code> <code>{{role}}</code> <code>{{contact}}</code> <code>{{sub_date}}</code> <code>{{item_count}}</code> <code>{{items_list}}</code> <code>{{notes}}</code> <code>{{import_code}}</code> <code>{{to_name}}</code><br>
+      3. Emails fire to both Wilson and Rev. Jopet on each submission.
+    </div>
+    <div class="fgrid">
+      <div class="fg"><label>EmailJS Public Key</label><input id="c-pk" type="text" placeholder="user_xxxxxxxxxxxxxx"></div>
+      <div class="fg"><label>Service ID</label><input id="c-sid" type="text" placeholder="service_xxxxxxx"></div>
+      <div class="fg"><label>Template ID</label><input id="c-tid" type="text" placeholder="template_xxxxxxx"></div>
+      <div class="fg" style="grid-column:1/-1;border-top:1px solid var(--bd);padding-top:11px;">
+        <label style="font-size:11px;color:var(--mid);font-weight:600;letter-spacing:.5px;text-transform:none;">Recipient 1 — FLCC BOTR Admin</label>
+      </div>
+      <div class="fg"><label>Admin Email</label><input id="c-ae" type="email" placeholder="wilson@email.com"></div>
+      <div class="fg"><label>Admin Name</label><input id="c-an" type="text" value="Bro. Wilson Guerzon"></div>
+      <div class="fg" style="grid-column:1/-1;border-top:1px solid var(--bd);padding-top:11px;">
+        <label style="font-size:11px;color:var(--mid);font-weight:600;letter-spacing:.5px;text-transform:none;">Recipient 2 — Lead Pastor</label>
+      </div>
+      <div class="fg"><label>Lead Pastor Email</label><input id="c-pe" type="email" placeholder="pastor@email.com"></div>
+      <div class="fg"><label>Lead Pastor Name</label><input id="c-pn" type="text" value="Rev. Jopet Alim"></div>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:8px;">
+      <button class="btn bp" onclick="saveSettings()">💾 Save Settings</button>
+      <button class="btn bs" onclick="toggleSettings()">Close</button>
+    </div>
+  </div>
+
+  <!-- MAIN FORM -->
+  <div id="mainForm">
+    <div class="info-banner">
+      📋 Fill in your church details and equipment list. On submission, a report is emailed to <strong>Bro. Wilson Guerzon (BOTR Admin)</strong> and <strong>Rev. Jopet Alim</strong> for inventory sync. You can also save your own copy after submitting.
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="card">
+      <div class="ch"><div class="sn">1</div>
+        <div class="cht"><h2>Church &amp; Submitter Information</h2>
+          <p>Select your satellite church and provide your details as the person filing this report.</p>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="fgrid">
+          <div class="fg">
+            <label>Satellite Church <span class="req">*</span></label>
+            <select id="s-church" onchange="churchChange()">
+              <option value="">Select your church…</option>
+              <optgroup label="— 🌿 Hope Sector —">
+                <option>FLCC Abundance</option><option>FLCC F&amp;B</option>
+                <option>FLCC F&amp;T</option><option>FLCC Cornerstone</option>
+              </optgroup>
+              <optgroup label="— 🔥 Faith Sector —">
+                <option>FLCC HOTK</option><option>FLCC Agape</option>
+                <option>FLCC Shekinah</option><option>FLCC BOTR Fri/Sun</option>
+              </optgroup>
+              <optgroup label="— ❤️ Love Sector —">
+                <option>FLCC MTCC</option><option>FLCC JIL</option>
+                <option>FLCC JAOC</option><option>FLCC Harvester</option>
+                <option>FLCC Virtual Church</option>
+              </optgroup>
+              <option value="other">Other (specify below)</option>
+            </select>
+          </div>
+          <div class="fg" id="cw" style="display:none;">
+            <label>Custom Church Name <span class="req">*</span></label>
+            <input type="text" id="s-custom" placeholder="Enter full church name">
+          </div>
+          <div class="fg"><label>Submitted By <span class="req">*</span></label><input type="text" id="s-sub" placeholder="Full name"></div>
+          <div class="fg"><label>Role / Position</label><input type="text" id="s-role" placeholder="e.g. CSL, Admin, Worship Leader"></div>
+          <div class="fg"><label>Contact Number</label><input type="text" id="s-con" placeholder="+965 or PH number"></div>
+          <div class="fg"><label>Submission Date</label><input type="date" id="s-dt"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="card">
+      <div class="ch"><div class="sn">2</div>
+        <div class="cht"><h2>Equipment Items</h2>
+          <p>List all equipment being reported. The 📷 column lets you attach an optional photo per item (auto-compressed).</p>
+        </div>
+      </div>
+      <div class="cb" style="padding-top:12px;">
+        <div class="tscroll">
+          <table class="itable">
+            <thead><tr>
+              <th>#</th><th style="min-width:150px;">Item Name <span class="req">*</span></th>
+              <th style="min-width:115px;">Category</th><th style="width:55px;">Qty</th>
+              <th style="min-width:95px;">Condition</th><th style="min-width:110px;">Location</th>
+              <th style="min-width:105px;">Date Acquired</th><th style="min-width:100px;">Serial / Asset</th>
+              <th style="min-width:110px;">Assigned To</th><th style="min-width:115px;">Remarks</th>
+              <th style="width:52px;text-align:center;">📷</th><th style="width:30px;"></th>
+            </tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <button class="add-btn" onclick="addRow()">+ Add Equipment Item</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="card">
+      <div class="ch"><div class="sn">3</div>
+        <div class="cht"><h2>Additional Notes</h2>
+          <p>Any special context, urgent repairs, or handling instructions for the BOTR Admin.</p>
+        </div>
+      </div>
+      <div class="cb">
+        <div class="fg">
+          <label>Notes / Special Instructions</label>
+          <textarea id="s-notes" placeholder="e.g. Two items need urgent repair. Requesting pickup coordination from Bro. Wilson."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="sa">
+      <div class="sa-note">✉ On submit, this report is emailed to <strong>Bro. Wilson Guerzon</strong> and <strong>Rev. Jopet Alim</strong>. You'll also be able to save your own copy of the submission.</div>
+      <button class="btn bp" id="subBtn" onclick="submitForm()">📤 Submit Report</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS SCREEN -->
+  <div class="success" id="success" style="display:none;">
+    <div class="si">✅</div>
+    <h2>Report Submitted!</h2>
+    <p id="smsg">Your equipment report has been emailed to Bro. Wilson Guerzon and Rev. Jopet Alim for central inventory sync.</p>
+
+    <!-- SUBMITTER COPY SECTION -->
+    <div style="background:var(--as);border:1px solid var(--am);border-radius:9px;padding:16px 18px;margin-bottom:16px;text-align:left;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--ac);margin-bottom:4px;">📄 Your Copy</div>
+      <div style="font-size:12px;color:var(--mid);margin-bottom:12px;">Save or print a formatted copy of your submission for your own records.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn bs" onclick="saveSubmitterCopy('csv')">⬇ Save as CSV</button>
+      </div>
+    </div>
+
+    <hr class="copy-divider">
+
+    <!-- ADMIN IMPORT SECTION -->
+    <div class="admin-section">
+      <div class="albl">🔐 For BOTR Admin — Import Code</div>
+      <div class="size-warn" id="sizeWarn">⚠ Code is large due to photos. Share the import code with Bro. Wilson Guerzon via Messenger.</div>
+      <div class="clbl" style="margin-top:6px;">Import Code</div>
+      <div class="cbox" id="cbox"></div>
+      <div class="acact">
+        <button class="btn bp" onclick="copyCode()">📋 Copy Import Code</button>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;">
+      <button class="btn bs" onclick="resetForm()" style="width:100%;justify-content:center;">↩ Submit Another Report</button>
+    </div>
+  </div>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CATS=['Audio / Sound','Visual / Media','Instruments','Furniture','Lighting','IT / Electronics','Supplies','Others'];
+const CONDS=['Good','Fair','For Repair','Retired'];
+const SK='flcc_botr_sub_cfg_v2';
+let rc=0, lastPayload='', lastChurch='', lastDecoded=null;
+
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function cfg(){try{return JSON.parse(localStorage.getItem(SK))||{};}catch{return {};}}
+function saveSettings(){
+  const s={pk:$('c-pk').value.trim(),sid:$('c-sid').value.trim(),tid:$('c-tid').value.trim(),ae:$('c-ae').value.trim(),an:$('c-an').value.trim()||'Bro. Wilson Guerzon',pe:$('c-pe').value.trim(),pn:$('c-pn').value.trim()||'Rev. Jopet Alim'};
+  localStorage.setItem(SK,JSON.stringify(s));toast('✔ Settings saved.');toggleSettings();
+}
+function toggleSettings(){
+  const p=$('sp');const open=p.style.display!=='none';
+  p.style.display=open?'none':'block';
+  if(!open){const c=cfg();$('c-pk').value=c.pk||'';$('c-sid').value=c.sid||'';$('c-tid').value=c.tid||'';$('c-ae').value=c.ae||'';$('c-an').value=c.an||'Bro. Wilson Guerzon';$('c-pe').value=c.pe||'';$('c-pn').value=c.pn||'Rev. Jopet Alim';}
+}
+function churchChange(){$('cw').style.display=$('s-church').value==='other'?'flex':'none';}
+
+// PHOTO COMPRESSION
+function compressImage(file,cb){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.createElement('canvas');
+      const MAX=100;let w=img.width,h=img.height;
+      if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      cb(canvas.toDataURL('image/jpeg',0.55));
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+function triggerPhoto(n){$('ph-inp-'+n).click();}
+function onPhotoChange(input,n){
+  if(!input.files||!input.files[0])return;
+  compressImage(input.files[0],data=>{
+    const cell=$('ph-cell-'+n);
+    cell.dataset.photo=data;
+    cell.innerHTML=`<img src="${data}" class="prev-img" onclick="triggerPhoto(${n})" title="Click to replace"><br><button onclick="clearPhoto(${n})" style="font-size:10px;color:var(--re);background:none;border:none;cursor:pointer;margin-top:2px;">✕</button>`;
+  });
+}
+function clearPhoto(n){
+  const c=$('ph-cell-'+n);c.dataset.photo='';
+  c.innerHTML=`<button class="pbtn" onclick="triggerPhoto(${n})" title="Add photo">📷</button>`;
+  $('ph-inp-'+n).value='';
+}
+
+// ROWS
+function addRow(){
+  rc++;const n=rc;
+  const tr=document.createElement('tr');tr.id='r'+n;
+  tr.innerHTML=`<td class="rn">${n}</td>
+<td><input type="text" class="r-nm" placeholder="e.g. Wireless Mic"></td>
+<td><select class="r-cat">${CATS.map(c=>`<option>${c}</option>`).join('')}</select></td>
+<td><input type="number" min="1" value="1" class="r-qty" style="width:50px;"></td>
+<td><select class="r-cd">${CONDS.map(c=>`<option>${c}</option>`).join('')}</select></td>
+<td><input type="text" class="r-loc" placeholder="e.g. Stage"></td>
+<td><input type="date" class="r-dt"></td>
+<td><input type="text" class="r-sr" placeholder="Optional"></td>
+<td><input type="text" class="r-ps" placeholder="Name or ministry"></td>
+<td><input type="text" class="r-rm" placeholder="Notes…"></td>
+<td style="text-align:center;">
+  <input type="file" id="ph-inp-${n}" accept="image/*" style="display:none;" onchange="onPhotoChange(this,${n})">
+  <div id="ph-cell-${n}" data-photo=""><button class="pbtn" onclick="triggerPhoto(${n})" title="Add photo">📷</button></div>
+</td>
+<td><button class="dbtn" onclick="delRow(${n})">✕</button></td>`;
+  $('rows').appendChild(tr);
+}
+function delRow(n){const r=$('r'+n);if(r)r.remove();}
+
+function collectItems(){
+  return [...$('rows').querySelectorAll('tr')].map(tr=>{
+    const n=tr.id.replace('r','');
+    return {name:tr.querySelector('.r-nm')?.value.trim()||'',cat:tr.querySelector('.r-cat')?.value||'Others',qty:parseInt(tr.querySelector('.r-qty')?.value)||1,status:tr.querySelector('.r-cd')?.value||'Good',loc:tr.querySelector('.r-loc')?.value.trim()||'',date:tr.querySelector('.r-dt')?.value||'',serial:tr.querySelector('.r-sr')?.value.trim()||'',person:tr.querySelector('.r-ps')?.value.trim()||'',remarks:tr.querySelector('.r-rm')?.value.trim()||'',photo:$('ph-cell-'+n)?.dataset.photo||''};
+  }).filter(i=>i.name);
+}
+
+function encodePayload(obj){
+  try{return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));}catch(e){return btoa(JSON.stringify(obj));}
+}
+
+async function submitForm(){
+  const cv=$('s-church').value;
+  const church=cv==='other'?$('s-custom').value.trim():cv;
+  const submitter=$('s-sub').value.trim();
+  const items=collectItems();
+  if(!church){toast('⚠ Please select your satellite church.');return;}
+  if(!submitter){toast('⚠ Please enter submitter name.');return;}
+  if(!items.length){toast('⚠ Please add at least one equipment item.');return;}
+
+  const btn=$('subBtn');btn.disabled=true;btn.innerHTML='⏳ Submitting…';
+  const now=new Date().toISOString().split('T')[0];
+  const payload={church,submitter,role:$('s-role').value.trim(),contact:$('s-con').value.trim(),date:$('s-dt').value||now,notes:$('s-notes').value.trim(),items,submittedAt:new Date().toISOString()};
+  const code=encodePayload(payload);
+  lastPayload=code;lastChurch=church;lastDecoded=payload;
+  const c=cfg();let sent=false;
+
+  if(c.pk&&c.sid&&c.tid&&(c.ae||c.pe)){
+    try{
+      emailjs.init({publicKey:c.pk});
+      const tp={church:payload.church,submitter:payload.submitter,role:payload.role||'—',contact:payload.contact||'—',sub_date:payload.date,item_count:items.length,
+        items_list:items.map((it,i)=>`${i+1}. ${it.name} | ${it.cat} | Qty: ${it.qty} | ${it.status}${it.loc?' | '+it.loc:''}${it.photo?' [📷 photo]':''}`).join('\n'),
+        notes:payload.notes||'—',import_code:code.length>3000?'[Code large — see downloaded file]':code};
+      if(c.ae) await emailjs.send(c.sid,c.tid,{...tp,to_email:c.ae,to_name:c.an||'Bro. Wilson Guerzon'});
+      if(c.pe) await emailjs.send(c.sid,c.tid,{...tp,to_email:c.pe,to_name:c.pn||'Rev. Jopet Alim'});
+      sent=true;
+    }catch(err){console.error('EmailJS:',err);toast('⚠ Email failed — codes still generated.');}
+  }
+
+  $('mainForm').style.display='none';$('success').style.display='block';
+  $('cbox').textContent=code;
+  if(code.length>4000){$('sizeWarn').style.display='block';}
+  if(!sent)$('smsg').innerHTML='<strong>EmailJS not yet configured.</strong> Please send the admin file to <strong>Bro. Wilson Guerzon</strong> via Messenger.';
+  btn.disabled=false;btn.innerHTML='📤 Submit Report';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// SUBMITTER COPY (branded printable receipt)
+function saveSubmitterCopy(mode){
+  const d=lastDecoded;
+  if(!d){toast('⚠ No submission data found.');return;}
+  const condColors={'Good':'#eaf3ee;color:#2a6049','Fair':'#fef3c7;color:#b45309','For Repair':'#fdf0ee;color:#c0392b','Retired':'#f1f5f9;color:#475569'};
+  let html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Equipment Submission — ${esc(d.church||'')}</title>
+<style>*{box-sizing:border-box;}body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;padding:30px 36px;max-width:900px;margin:auto;color:#181816;}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #2a6049;}
+.cross{width:34px;height:34px;background:#2a6049;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;text-align:center;line-height:34px;}
+.hd h1{font-size:18px;margin:0;font-family:Georgia,serif;}
+.hd .sub{font-size:11px;color:#888;margin:2px 0 0;}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 20px;margin-bottom:20px;background:#f9f9f7;border:1px solid #e6e6e2;border-radius:8px;padding:14px 16px;}
+.inf-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.6px;color:#9a9a94;margin-bottom:2px;}
+.inf-val{font-weight:600;font-size:12px;}
+.sec{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#2a6049;font-weight:700;padding-bottom:5px;border-bottom:1px solid #c8e3d4;margin-bottom:10px;}
+table{width:100%;border-collapse:collapse;margin-bottom:18px;}
+th{background:#eaf3ee;border:1px solid #c8e3d4;padding:7px 8px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#2a6049;text-align:left;}
+td{border:1px solid #ddd;padding:6px 8px;font-size:11px;vertical-align:top;}
+tr:nth-child(even) td{background:#f9fdf9;}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;}
+.photo-thumb{max-height:40px;border-radius:3px;border:1px solid #ddd;}
+.notes-box{background:#f9f9f7;border:1px solid #e6e6e2;border-radius:6px;padding:10px 13px;font-size:12px;color:#555;margin-bottom:16px;white-space:pre-wrap;}
+.footer{margin-top:20px;font-size:10px;color:#aaa;text-align:center;border-top:1px solid #eee;padding-top:10px;}
+@media print{body{padding:14px;}}</style>
+</head><body>
+<div class="hd"><div class="cross">✝</div><div><h1>FLCC BOTR Network</h1><p class="sub">Equipment Submission Receipt</p></div></div>
+<div class="info-grid">
+  <div><div class="inf-lbl">Church</div><div class="inf-val">${esc(d.church||'—')}</div></div>
+  <div><div class="inf-lbl">Submitted By</div><div class="inf-val">${esc(d.submitter||'—')}</div></div>
+  <div><div class="inf-lbl">Role / Position</div><div class="inf-val">${esc(d.role||'—')}</div></div>
+  <div><div class="inf-lbl">Contact</div><div class="inf-val">${esc(d.contact||'—')}</div></div>
+  <div><div class="inf-lbl">Submission Date</div><div class="inf-val">${esc(d.date||'—')}</div></div>
+  <div><div class="inf-lbl">Total Items</div><div class="inf-val">${d.items.length} equipment item(s)</div></div>
+</div>
+<div class="sec">Equipment List</div>
+<table><thead><tr><th>#</th><th>Item Name</th><th>Category</th><th>Qty</th><th>Condition</th><th>Location</th><th>Date Acquired</th><th>Serial / Asset</th><th>Assigned To</th><th>Remarks</th><th>Photo</th></tr></thead><tbody>`;
+  d.items.forEach((item,idx)=>{
+    const cc=condColors[item.status]||'#f1f5f9;color:#475569';
+    html+=`<tr><td style="text-align:center;color:#aaa;font-size:10px;">${idx+1}</td>
+<td><strong>${esc(item.name)}</strong>${item.serial?`<br><span style="font-size:10px;color:#888;">${esc(item.serial)}</span>`:''}</td>
+<td style="font-size:11px;">${esc(item.cat)}</td>
+<td style="text-align:center;font-weight:700;">${item.qty}</td>
+<td><span class="badge" style="background:${cc}">${esc(item.status)}</span></td>
+<td>${esc(item.loc||'—')}</td>
+<td style="font-family:monospace;font-size:10px;white-space:nowrap;">${item.date||'—'}</td>
+<td style="font-family:monospace;font-size:10px;">${esc(item.serial||'—')}</td>
+<td>${esc(item.person||'—')}</td>
+<td style="color:#666;">${esc(item.remarks||'—')}</td>
+<td>${item.photo?`<img src="${item.photo}" class="photo-thumb">`:''}</td></tr>`;
+  });
+  html+=`</tbody></table>`;
+  if(d.notes){html+=`<div class="sec">Notes / Special Instructions</div><div class="notes-box">${esc(d.notes)}</div>`;}
+  html+=`<div class="footer">FLCC BOTR Network · Submitted: ${new Date(d.submittedAt||Date.now()).toLocaleString('en-GB',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})} · This is your submission receipt. Keep for records.</div>`;
+  html+=`</body></html>`;
+
+  if(mode==='print'){
+    const w=window.open('','_blank');
+    w.document.write(html);w.document.close();
+    setTimeout(()=>w.print(),700);
+  } else {
+    const blob=new Blob([html],{type:'text/html;charset=utf-8;'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;
+    a.download='My_Submission_'+lastChurch.replace(/\s+/g,'_')+'_'+new Date().toISOString().split('T')[0]+'.html';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    toast('📥 HTML copy downloaded — open in any browser.');
+  }
+}
+
+function copyCode(){
+  const t=$('cbox').textContent;
+  if(t.length>8000){toast('⚠ Code too large. Use Download Admin File.');return;}
+  navigator.clipboard.writeText(t).then(()=>toast('✔ Import code copied!')).catch(()=>{
+    const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a);toast('✔ Copied!');
+  });
+}
+function downloadAdminFile(){
+  const blob=new Blob([lastPayload],{type:'text/plain;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;
+  a.download='BOTR_Admin_Import_'+lastChurch.replace(/\s+/g,'_')+'_'+new Date().toISOString().split('T')[0]+'.txt';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  toast('📥 Admin import file downloaded.');
+}
+
+function resetForm(){
+  $('mainForm').style.display='block';$('success').style.display='none';
+  $('s-church').value='';$('s-sub').value='';$('s-role').value='';$('s-con').value='';$('s-notes').value='';
+  $('cw').style.display='none';$('rows').innerHTML='';$('sizeWarn').style.display='none';
+  rc=0;lastDecoded=null;addRow();window.scrollTo({top:0,behavior:'smooth'});
+}
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2900);}
+
+$('s-dt').value=new Date().toISOString().split('T')[0];
+addRow();
+</script>
+</body>
+</html>
